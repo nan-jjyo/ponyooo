@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HAM CATCH</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage" aria-label="HAM CATCH">
+    <!-- LOADING -->
+    <section id="screen-loading" class="screen screen--active" aria-hidden="false">
+      <div class="loading-wrap">
+        <div class="loading-bar">
+          <div class="loading-pips" id="loadingPips" aria-hidden="true"></div>
+          <div class="loading-fill" id="loadingFill"></div>
+        </div>
+        <div class="loading-text">LOADING</div>
+      </div>
+    </section>
+
+    <!-- HOME -->
+    <section id="screen-home" class="screen" aria-hidden="true">
+      <div class="frame">
+        <div class="card">
+          <h1 class="title">HAM<br/>CATCH</h1>
+
+          <button id="btnPlay" class="btn btn-play" type="button">PLAY</button>
+
+          <!-- NOTE: ponyo1 di bawah tombol play -->
+          <img id="homePonyo" class="home-ponyo" src="assets/ponyo1.PNG" alt="Ponyo" />
+        </div>
+
+        <div class="footer-note">// Ponyo Edition</div>
+      </div>
+    </section>
+
+    <!-- GAME -->
+    <section id="screen-game" class="screen" aria-hidden="true">
+      <div class="frame">
+        <div class="hud">
+          <div class="hud-left">
+            <span class="hud-label">Score:</span>
+            <span id="scoreText" class="hud-value">0</span>
+          </div>
+
+          <div class="hud-right" aria-label="Lives">
+            <span class="heart" id="life1">❤</span>
+            <span class="heart" id="life2">❤</span>
+            <span class="heart" id="life3">❤</span>
+          </div>
+        </div>
+
+        <div class="playfield-wrap">
+          <div id="playfield" class="playfield" role="application" aria-label="Playfield">
+            <img id="player" class="player" src="assets/ponyo1.PNG" alt="Player Ponyo" draggable="false" />
+            <!-- items jatuh akan di-inject oleh JS -->
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="btnLeft" class="btn-circle" type="button" aria-label="Left">←</button>
+          <button id="btnRight" class="btn-circle" type="button" aria-label="Right">→</button>
+        </div>
+
+        <div class="footer-note">// Ponyo Edition</div>
+      </div>
+    </section>
+
+    <!-- END -->
+    <section id="screen-end" class="screen" aria-hidden="true">
+      <div class="frame">
+        <div class="card end-card">
+          <div class="end-title">GAME<br/>OVER</div>
+          <div class="end-score">
+            <div class="end-score-label">Score:</div>
+            <div id="finalScore" class="end-score-value">0</div>
+          </div>
+
+          <div class="end-actions">
+            <button id="btnHome" class="btn btn-soft" type="button">Home</button>
+            <button id="btnReplay" class="btn btn-soft" type="button">Replay</button>
+          </div>
+        </div>
+
+        <div class="footer-note">// Ponyo Edition</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+:root{
+  --bg: #f4f1ed;
+  --accent: #b64b2d;   /* coklat-merah seperti mockup */
+  --card: #f6f3ef;
+  --ink: #3b2a24;
+  --muted: #6e5a52;
+
+  /* ukuran "mobile screen" */
+  --w: 360px;
+  --h: 640px;
+
+  /* ukuran aset agar mirip prototipe */
+  --player-w: 44px;
+  --player-h: 44px;
+  --item: 34px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  display:grid;
+  place-items:center;
+  background: #efeae4;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--ink);
+}
+
+.stage{
+  width: var(--w);
+  height: var(--h);
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+}
+
+/* semua screen numpuk, yang aktif ditampilin */
+.screen{
+  position:absolute;
+  inset:0;
+  display:none;
+}
+.screen--active{ display:block; }
+
+/* frame coklat luar */
+.frame{
+  position:absolute;
+  inset: 70px 22px 22px 22px; /* ruang atas buat “loading bar style” look */
+  background: var(--accent);
+  border-radius: 10px;
+  padding: 18px;
+  display:flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* panel putih */
+.card{
+  flex: 1;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.04);
+  padding: 26px 18px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.title{
+  margin:0;
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  letter-spacing: 2px;
+  text-align:center;
+  line-height: 1.05;
+  font-size: 36px;
+  color: var(--ink);
+}
+
+.btn{
+  border: none;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 10px 22px rgba(0,0,0,.15);
+}
+.btn:active{ transform: translateY(1px); }
+
+.btn-play{
+  padding: 10px 22px;
+  font-size: 14px;
+}
+
+.btn-soft{
+  background: #d9d1cb;
+  color: var(--ink);
+  box-shadow: none;
+  font-weight: 800;
+}
+
+.home-ponyo{
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  margin-top: 6px;
+}
+
+.footer-note{
+  text-align:right;
+  font-weight:700;
+  color: rgba(255,255,255,.85);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* LOADING */
+.loading-wrap{
+  position:absolute;
+  top: 70px;
+  left: 18px;
+  right: 18px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 10px;
+}
+
+.loading-bar{
+  width: 100%;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 999px;
+  position:relative;
+  overflow:hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);
+}
+
+.loading-fill{
+  position:absolute;
+  inset:0;
+  width: 0%;
+  background: rgba(255,255,255,.14);
+  border-radius: 999px;
+}
+
+.loading-pips{
+  position:absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display:flex;
+  gap: 4px;
+}
+
+.loading-pips span{
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.75);
+  opacity: .35;
+}
+
+.loading-text{
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+/* HUD + PLAYFIELD */
+.hud{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  color: white;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 2px 2px 0 2px;
+}
+
+.hud-label{ opacity:.9; font-size: 11px; }
+.hud-value{ font-size: 12px; }
+
+.heart{
+  color: #ff4d6d;
+  text-shadow: 0 2px 10px rgba(0,0,0,.25);
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.playfield-wrap{
+  flex: 1;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.04);
+  padding: 10px;
+}
+
+.playfield{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow:hidden;
+  border-radius: 10px;
+  background: #f1ece7;
+}
+
+/* player ponyo kecil */
+.player{
+  position:absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--player-w);
+  height: var(--player-h);
+  object-fit: contain;
+  image-rendering: pixelated;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+/* item jatuh */
+.falling{
+  position:absolute;
+  top: -40px;
+  width: var(--item);
+  height: var(--item);
+  object-fit: contain;
+  image-rendering: pixelated;
+  user-select:none;
+  -webkit-user-drag:none;
+  pointer-events:none;
+}
+
+.controls{
+  display:flex;
+  justify-content: center;
+  gap: 26px;
+  padding-bottom: 2px;
+}
+
+.btn-circle{
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  border: none;
+  cursor:pointer;
+  background: #f6f3ef;
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+}
+.btn-circle:active{ transform: translateY(1px); }
+
+/* END screen */
+.end-card{
+  gap: 12px;
+}
+
+.end-title{
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1.05;
+  font-size: 28px;
+  text-align:center;
+}
+
+.end-score{
+  display:flex;
+  align-items:baseline;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.end-score-value{
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.end-actions{
+  display:flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* desktop tetap ukuran sama, tapi kalau layar kecil banget, scale dikit */
+@media (max-height: 690px){
+  .stage{
+    transform: scale(.94);
+    transform-origin: center;
+  }
+}
+@media (max-width: 380px){
+  .stage{
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
